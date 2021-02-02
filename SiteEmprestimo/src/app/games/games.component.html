@@ -1,0 +1,53 @@
+<div class='container-fluid' style="background-color: rgb(229, 241, 211);">
+    <div class="row" style="padding: 20px; background-color: green;">
+      <div class="col-sm-10">
+        <h2 style="color: rgb(188, 224, 135)">Emprestimos de Games da Grasi</h2>
+      </div>
+      <div class="col-sm-2">
+        <h4 style="color: rgb(188, 224, 135)">{{nomeUsuario}}</h4>
+        <button (click)="deslogar()">SAIR</button>
+      </div>
+      <div class="col-sm-2">
+        
+        <!-- Modal -->
+        <ng-template #mymodal let-modal>
+          <div class="modal-header">
+            <h4 class="modal-title" id="modal-basic-title">Games</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div>
+              {{gameEmprestado.nomeGame}}
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); emprestar()">Pegar Emprestado</button>
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click'); cancelar();">Cancelar</button>
+          </div>
+        </ng-template>
+      </div>
+    </div>
+    <div class='col-sm-12 text-center' style="margin: 0;">
+      <ngb-carousel>
+        <ng-template ngbSlide *ngFor="let c of gameDisponiveis">
+          <img src={{c.enderecoImagem}} alt="Delhi Metro" style="width: 200px; height: 200px;">
+          <div class="carousel-caption" style="position:static;">
+            <h3 style="color: green">{{c.nomeGame}}</h3>
+          </div>
+        </ng-template>
+  
+      </ngb-carousel>
+      <div class="row col-sm-12 text-center">
+        <div class="card" style="width: 15rem;" *ngFor="let g of gameDisponiveis">
+          <img src={{g.enderecoImagem}} class="card-img-top" alt="..." style=" height: 200px;" id="g.enderecoImagem">
+          <div class="card-body">
+            <h5 class="card-title">{{g.nomeGame}}</h5>
+            <a  class="btn btn-primary" (click)="pegarGame(g.idGame);open(mymodal)" id="g.idGame">Emprestar</a>
+  
+          </div>
+        </div>
+      </div>
+  
+    </div>

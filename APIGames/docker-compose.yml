@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  emprestimoapi:
+    image: ${DOCKER_REGISTRY-}emprestimoapi
+    build:
+      context: .
+      dockerfile: LojaAPI\Dockerfile

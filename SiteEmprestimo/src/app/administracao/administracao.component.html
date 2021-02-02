@@ -1,0 +1,92 @@
+<div class='container-fluid' style="background-color: rgb(229, 241, 211); min-height: 650px;">
+    <div class="row" style="padding: 20px; background-color: green;">
+        <div class="col-sm-10">
+            <h2 style="color: rgb(188, 224, 135)">Administração dos Jogos da Grasi</h2>
+        </div>
+        <div class="col-sm-2">
+            <h4 style="color: rgb(188, 224, 135)">Administrador</h4>
+            <button (click)="deslogar()">SAIR</button>
+        </div>
+    </div>
+    <div class='col-sm-12'>
+        <h5 style="color:green; margin-top: 15px;">Relação de Jogos</h5>
+    </div>
+    <div class='col-sm-12' style="display: flex;justify-content: flex-start;flex-flow: row; max-width: 800px;height: auto;flex: 1 1 100%;flex-wrap: wrap;">
+        <div class="col-sm-3" *ngFor="let jogos of game">
+            <h6 style="height: 30px;margin-top: 20px;">{{jogos.nomeGame}}</h6> <button class="btn btn-danger" (click)="excluiGame(jogos.nomeGame)" >Excluir Jogo</button>
+        </div>
+        <div class="col-sm-3" style="margin-top:58px;">
+            <button class="btn btn-success" (click)="open(modalGame)">Incluir Jogo</button>
+
+        </div>
+    </div>
+    <div class='col-sm-12'>
+        <h5 style="color:green; margin-top: 15px;">Relação de Jogos Emprestados</h5>
+    </div>
+    <div class='col-sm-12' style="display: flex;justify-content: flex-start;flex-flow: row; max-width: 800px;height: auto;flex: 1 1 100%;flex-wrap: wrap;">
+       
+        <div class="col-3" *ngFor="let b of gameMostrarNaoDisponivel" style="margin-right: 30px">
+            <h6 style="height: 30px;margin-top: 20px;">{{b.nomeGame}} -- {{b.nomeUsuario}} -- {{b.dataEmprestimo}}</h6><button class="btn btn-danger"(click)="excluiEmprestimo(b.idGame)">Dar Baixa de Jogo</button>
+        </div>
+    </div>
+    <div class="col-sm-2">
+
+        <!-- Modal - Usuario -->
+        <ng-template #mymodal let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Criar Usuário</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="form">
+                   <input type="text" formControlName="nome" placeholder="Nome" name="nome">
+                   <input type="text" formControlName="senha" placeholder="Senha" name="senha">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-outline-dark"
+                    (click)="modal.close('Save click');incluirUsuario() ">Incluir Usuario</button>
+                <button type="button" class="btn btn-outline-dark"
+                    (click)="modal.close('Save click'); cancelar();">Cancelar</button>
+            </div>
+        </ng-template>
+    </div>
+    <div class="col-sm-2">
+
+        <!-- Modal - Game -->
+        <ng-template #modalGame let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title" id="modal-basic-title">Adicionar Game</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="formGame">
+                   <input type="text" formControlName="nomeGame" name="nomeGame">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-outline-dark"
+                    (click)="modal.close('Save click');AddGame() ">Incluir Game</button>
+                <button type="button" class="btn btn-outline-dark"
+                    (click)="modal.close('Save click'); cancelar();">Cancelar</button>
+            </div>
+        </ng-template>
+    </div>
+    <div class='col-sm-12'>
+        <h5 style="color:green; margin-top: 15px;">Relação de Usuarios</h5>
+    </div>
+    <div class='col-sm-12' style="display: flex;justify-content: flex-start;flex-flow: row; max-width: 800px;height: auto;flex: 1 1 100%;flex-wrap: wrap;">
+        <div class="sm-3" *ngFor="let usuario of usuarios">
+            <h6 style="height: 30px;margin-top: 20px;">{{usuario.nome}}</h6><button class="btn btn-danger" (click)="excluirUsuario(usuario.nome)" style="margin-right: 30px;" >Excluir Usuário</button>
+        </div>
+        <div class="col-sm-3" style="margin-top:58px; margin-left: 30px;">
+            <button class="btn btn-success" (click)="open(mymodal)" >Incluir Usuário</button>
+
+        </div>
+    </div>
+    
+</div>

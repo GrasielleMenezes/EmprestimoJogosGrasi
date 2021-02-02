@@ -1,0 +1,25 @@
+<form [formGroup]="formularioDeUsuario" (ngSubmit)="logar()">
+    <div class='container-fluid' style="background-color:  rgb(229, 241, 211); min-height: 650px;">
+        <div class="row" style="padding: 20px; background-color: green;">
+            <div class="col-sm-12">
+                <h2 style="color: rgb(188, 224, 135)">Login Empresta Jogos da Grasi</h2>
+            </div>
+
+        </div>
+        <div class='col-sm-12 text-center'>
+            <h4 style="color:green; margin-top: 15px;">Digite usuário e Senha</h4>
+        </div>
+        <div class='col-sm-12 text-center'>
+            <div class="mb-3 col-sm-4" style="margin-left: 434px;">
+                <input type="text" class="form-control" formControlName="nome" id="login" placeholder="Nome">
+                <input type="password" class="form-control" formControlName="senha" id="senha" placeholder="Password">
+            </div>
+            <div>{{ erro }}</div>
+        </div>
+        <div class='col-sm-12 text-center'>
+            <button class="btn btn-primary" [disabled]="!formularioDeUsuario.valid" style="margin-bottom: 10px;">Logar</button>
+        </div>
+    </div>
+    
+    
+</form>
